@@ -7,7 +7,7 @@
         {{ end }}
       {{ end }}
     </ul>
-  {{ else if .Site.Params.hideEmptyStats }}
+  {{ else if .Params.hideEmptyStats }}
   {{ else }}
     <ul class="categories">
       <li>None</li>
@@ -21,7 +21,7 @@
         {{ end }}
       {{ end }}
     </ul>
-  {{ else if .Site.Params.hideEmptyStats }}
+  {{ else if .Params.hideEmptyStats }}
   {{ else }}
     <ul class="tags">
       <li>None</li>
