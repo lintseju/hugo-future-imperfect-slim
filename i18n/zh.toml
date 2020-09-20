@@ -3,6 +3,10 @@
   other = "January 2, 2006"
 
 # Sidebar
+[lastmod]
+  other = "最後修改："
+[toc]
+  other = "目錄"
 [recent_posts]
   other = "最新文章"
 [see_more]
@@ -40,7 +44,7 @@
 [reading_time]
   other = "閱讀時間約 {{ .Count }} 分鐘"
 [word_count]
-  other = "{{ .WordCount }} 字"
+  other = "字"
 [read_more]
   other = "閱讀全文"
 [share_post]

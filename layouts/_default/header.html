@@ -12,10 +12,11 @@
   </div>
   {{ if (.Params.Meta | default true) }}
   <div class="meta">
-    <time datetime="{{ .Date }}">{{ .Render "date" }}</time>
+	<time datetime="{{ .Date }}">{{ .Render "date" }}</time>
+	{{ if .Params.mod }}<time datetime="{{ .Lastmod }}">{{ i18n "lastmod" }}</br>{{ .Render "lastmod" }}</time>{{end}}
     {{ with .Params.author }}<p>{{ . }}</p>{{ end }}
 	{{ if .Site.Params.ReadingTime }}<p>{{ i18n "reading_time" .ReadingTime }}</p>{{ end }}
-	{{ if .Site.Params.WordCount }}<p>{{ i18n "word_count" .WordCount }}</p>{{ end }}
+	{{ if .Site.Params.WordCount }}<p>{{ .WordCount }} {{ i18n "word_count" }}</p>{{ end }}
   </div>
   {{ end }}
 </header>
