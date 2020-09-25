@@ -1,4 +1,4 @@
-{{ if .Site.DisqusShortname }}
+{{ if (and (.Site.DisqusShortname) (ne hugo.Environment "development")) }}
   <article class="post">
     {{ template "_internal/disqus.html" . }}
   </article>

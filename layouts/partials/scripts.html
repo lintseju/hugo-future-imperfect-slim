@@ -51,7 +51,7 @@
 {{ if and .Site.Params.staticman.recaptcha.siteKey .Site.Params.staticman.recaptcha.encryptedKey }}
   <script src='https://www.google.com/recaptcha/api.js'></script>
 {{- end -}}
-{{- with .Site.GoogleAnalytics }}
+{{ if (and (.Site.GoogleAnalytics) (ne hugo.Environment "development")) }}
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
