@@ -51,11 +51,3 @@
 {{ if and .Site.Params.staticman.recaptcha.siteKey .Site.Params.staticman.recaptcha.encryptedKey }}
   <script src='https://www.google.com/recaptcha/api.js'></script>
 {{- end -}}
-{{ if (and (.Site.GoogleAnalytics) (ne hugo.Environment "development")) }}
-<script>
-  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga('create', '{{ .Site.GoogleAnalytics }}', 'auto');
-  ga('send', 'pageview');
-  </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-{{- end -}}
