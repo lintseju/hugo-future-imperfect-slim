@@ -5,6 +5,7 @@
       {{ partial "share-buttons" . }}
     </div>
     <div class="content">
+	  {{ if .Params.katex}} {{ partial "katex.html" . }} {{ end }}
       {{ .Render "featured" }}
       {{ .Content }}
     </div>
