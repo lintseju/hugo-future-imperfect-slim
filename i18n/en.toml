@@ -9,10 +9,14 @@
   other = "See More"
 [learn_more]
   other = "Learn More"
+[copyright]
+  other = "All rights reserved"
 [attribution]
   other = "Theme: <a href='https://github.com/pacollins/hugo-future-imperfect-slim' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>A <a href='https://html5up.net/future-imperfect' target='_blank' rel='noopener'>HTML5 UP port</a> | Powered by <a href='https://gohugo.io/' title='{{ .Site.Hugo.Version }}' target='_blank' rel='noopener'>Hugo</a>"
 
 # Sections
+[section]
+  other = "Piece of Writings"
 [about]
   other = "About"
 [contact]
@@ -22,6 +26,8 @@
   other = "Replies typically within {{ .Count }} hours."
 [blog]
   other = "Blog"
+[posts]
+  other = "Posts"
 [categories]
   one = "Category"
   other = "Categories"
@@ -36,6 +42,8 @@
 # Post
 [reading_time]
   other = "{{ .Count }}-Minute Read"
+[word_count]
+  other = "words"
 [read_more]
   other = "Read More"
 [share_post]
