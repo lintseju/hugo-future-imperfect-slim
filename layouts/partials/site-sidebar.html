@@ -2,7 +2,7 @@
   {{ if gt .Site.Params.sidebar.postAmount 0 }}
     <section id="recent-posts">
       <header>
-        <h1>{{ i18n "recent_posts" }}</h1>
+        <h2>{{ i18n "recent_posts" }}</h2>
       </header>
       {{ range first (.Site.Params.sidebar.postAmount | default 5) (where site.RegularPages "Type" "in" site.Params.mainSections) }}
       <article class="mini-post">
@@ -26,7 +26,7 @@
     {{ if ne ($.Scratch.Get "showCategories") false }}
       <section id="categories">
         <header>
-          <h1><a href="{{ "categories" | relLangURL }}">{{ i18n "categories" }}</a></h1>
+          <h2><a href="{{ "categories" | relLangURL }}">{{ i18n "categories" }}</a></h2>
         </header>
         <ul>
           {{ $.Scratch.Set "categories" (cond .Site.Params.sidebar.categoriesByCount .Site.Taxonomies.categories.ByCount .Site.Taxonomies.categories.Alphabetical) }}
@@ -44,7 +44,7 @@
   {{ if ne ($.Scratch.Get "showTags") false }}
 	<section id="tags">
 	  <header>
-		<h1><a href="{{ "tags" | relLangURL }}">{{ i18n "tags" }}</a></h1>
+		<h2><a href="{{ "tags" | relLangURL }}">{{ i18n "tags" }}</a></h2>
 	  </header>
 	  <ul>
 		{{ $.Scratch.Set "tags" (cond .Site.Params.sidebar.tagsByCount .Site.Taxonomies.tags.ByCount .Site.Taxonomies.tags.Alphabetical) }}
