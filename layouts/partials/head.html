@@ -71,5 +71,10 @@
   </script>
   {{- end -}}
  {{- end -}}
+ {{ if (and (.Site.Params.GoogleAdSense) (ne hugo.Environment "development")) }}
+  {{ with .Site.Params.GoogleAdSense -}}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ . }}" crossorigin="anonymous"></script>
+  {{- end -}}
+ {{- end -}}
  <link rel="canonical" href="{{ .Permalink }}" />
 </head>
