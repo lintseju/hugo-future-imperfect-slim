@@ -10,6 +10,8 @@
 	<br>
 	{{ (.Site.Copyright | safeHTML) | default (print "\u00A9 " .Site.LastChange.Year " " (.Site.Author.name | default .Site.Title) ) }}
 	{{ i18n "copyright" . | safeHTML }}
+  <br>
+  <a href="{{ "privacy_policy" | relLangURL }}">{{ i18n "privacy_policy" . | safeHTML }}</a>
   </p>
 </footer>
 <a id="back-to-top" href="#" class="fas fa-arrow-up fa-2x"></a>

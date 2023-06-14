@@ -17,6 +17,8 @@
   other = "保留所有權利"
 [attribution]
   other = "主題修改自:<br> <a href='https://themes.gohugo.io/hugo-future-imperfect-slim/' target='_blank' rel='noopener'>Hugo Future Imperfect Slim</a><br>由 <a href='https://gohugo.io/' target='_blank' rel='noopener' title='{{ .Site.Hugo.Version }}'>Hugo</a> 提供"
+[privacy_policy]
+  other = "隱私權政策"
 
 # Sections
 [section]
