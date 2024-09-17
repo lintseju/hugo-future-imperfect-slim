@@ -91,3 +91,7 @@
   other = "抱歉，您正在尋找的頁面並不存在。"
 [404_back]
   other = "回去"
+
+# Follows
+[follow_me]
+  other = "追蹤我："

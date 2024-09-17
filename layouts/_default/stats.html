@@ -1,3 +1,12 @@
+{{ if .Params.categories }}
+{{ if or (.Site.Params.footer.rssFooter) (.Site.Params.footer.socialFooter) }}
+      <ul class="footer-socnet-icons">
+        {{ i18n "follow_me" }}
+        {{ if .Site.Params.footer.rssFooter }}{{ partial "rss-icon" . }}{{ end }}
+        {{ if .Site.Params.footer.socialFooter }}{{ partial "socnet-icon" . }}{{ end }}
+      </ul>
+{{ end }}
+{{ end }}
 <div class="stats">
   {{ if .Params.categories }}
     <ul class="categories">

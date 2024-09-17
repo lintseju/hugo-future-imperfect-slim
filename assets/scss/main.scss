@@ -1104,6 +1104,22 @@ figcaption {
   }
 }
 
+.footer-socnet-icons {
+  @include display-flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  padding-left: 0;
+  li {
+    margin: 0 0.5em;
+    min-width: 20px;
+    list-style-type: none;
+    a {
+      opacity: 0.6;
+      border: none;
+    }
+  }
+}
+
 /* ==========================================================================
    IDs and Grid
    ========================================================================== */

@@ -92,3 +92,7 @@
   other = "Sorry, but the page you were trying to view does not exist."
 [404_back]
   other = "Go Back"
+
+# Follows
+[follow_me]
+  other = "Follow me:"
