@@ -1,7 +1,7 @@
 {{ if .Params.categories }}
 {{ if or (.Site.Params.footer.rssFooter) (.Site.Params.footer.socialFooter) }}
       <ul class="footer-socnet-icons">
-        {{ i18n "follow_me" }}
+        {{ i18n "follow_me" }}&nbsp&nbsp&nbsp
         {{ if .Site.Params.footer.rssFooter }}{{ partial "rss-icon" . }}{{ end }}
         {{ if .Site.Params.footer.socialFooter }}{{ partial "socnet-icon" . }}{{ end }}
       </ul>
