@@ -1,0 +1,14 @@
+
+{{ if .IsNamedParams }}
+    {{ $.Scratch.Set "src" (.Get "src") }}
+    {{ $.Scratch.Set "alt" (.Get "alt") }}
+{{ else }}
+    {{ $.Scratch.Set "src" (.Get 0) }}
+    {{ $.Scratch.Set "alt" (.Get 1) }}
+{{ end }}
+{{ $.Scratch.Set "structType" "shortcode" }}
+{{ $src := $.Scratch.Get "src" }}
+{{ $alt := $.Scratch.Get "alt" }}
+<div style="display:flex;justify-content:center;align-items:center;">
+  <img src="{{ path.Join $src | absURL }}" alt="{{ $alt }}"></a>
+</div>  
