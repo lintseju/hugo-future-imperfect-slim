@@ -1,0 +1,11 @@
+{{- /* hreflang alternate links for multilingual SEO. Only emitted on multilingual sites. */ -}}
+{{- if gt (len .Site.Languages) 1 -}}
+  {{- range .AllTranslations -}}
+    <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" />
+  {{- end -}}
+  {{- with .AllTranslations -}}
+    {{- range first 1 . -}}
+      <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}" />
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

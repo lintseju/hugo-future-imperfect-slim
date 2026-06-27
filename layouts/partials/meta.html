@@ -1,6 +1,8 @@
 <meta charset="utf-8">
 <title>{{ .Title }}{{ if ne .Title .Site.Title }} - {{ .Site.Title }}{{ end }}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{{ with .Params.author | default .Site.Author.name | default .Site.Params.meta.author }}<meta name="author" content="{{ . }}">{{ end }}
+{{ with .Params.robots }}<meta name="robots" content="{{ . }}">{{ end }}
 <!-- TODO: Do we want to add rel=author? -->
 {{ if .Site.Params.meta.favicon }}
   <link rel="apple-touch-icon" sizes="180x180" href="{{ "favicon/apple-touch-icon.png" | relURL}}{{ with .Site.Params.meta.faviconVersion }}?v={{ . }}{{ end }}">

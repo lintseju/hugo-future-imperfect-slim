@@ -9,12 +9,19 @@ disqusShortname         = ""
 googleAnalytics         = ""
 pluralizeListTitles     = false
 disableLanguages        = []
+enableRobotsTXT         = true
 
 [markup.goldmark.renderer]
   unsafe                = true
 
 [outputs]
-  home                  = ["html", "json", "rss"]
+  home                  = ["html", "json", "rss", "llms"]
+
+[outputFormats.llms]
+  mediaType             = "text/plain"
+  baseName              = "llms"
+  isPlainText           = true
+  rel                   = "alternate"
 
 [params]
   enableCDN             = false
@@ -29,6 +36,15 @@ disableLanguages        = []
   removeBlur            = false
   socialShare           = ["twitter", "facebook", "reddit", "linkedin", "pinterest", "email"]
   hideEmptyStats        = false
+  images                = ["img/main/logo.jpg"]  # Site-wide og:image / Twitter image fallback
+
+  [params.seo]
+    structuredData      = true            # Emit JSON-LD (Article, Breadcrumb, WebSite, Organization)
+    organizationType    = "Organization"  # Publisher type: "Organization" or "Person"
+    # logo              = "img/main/logo.jpg"  # Publisher logo for JSON-LD (absolute path under static)
+    # searchUrl         = ""               # e.g. "https://example.com/search/?q={search_term_string}" to emit SearchAction
+    llmsTxt             = true             # Generate /llms.txt index for LLM crawlers
+    aiCrawlers          = true             # Allow AI crawlers (GPTBot, ClaudeBot, ...) in robots.txt
 
   [params.meta]
     description         = "A theme by HTML5 UP, ported by Julio Pescador. Slimmed and enhanced by Patrick Collins. Multilingual by StatnMap. Powered by Hugo."
