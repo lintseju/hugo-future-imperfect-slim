@@ -1,0 +1,13 @@
+{{- /* llms.txt index for LLM crawlers, per https://llmstxt.org. Toggle with params.seo.llmsTxt. */ -}}
+{{- if .Site.Params.seo.llmsTxt | default true -}}
+# {{ .Site.Title }}
+{{ with .Site.Params.description }}
+> {{ . | plainify }}
+{{ end }}
+{{- range .Site.RegularPages.GroupBy "Section" }}
+## {{ with .Key }}{{ . | humanize }}{{ else }}Pages{{ end }}
+{{ range .Pages }}
+- [{{ .Title | plainify }}]({{ .Permalink }}){{ with .Description | default .Summary }}: {{ . | plainify | chomp }}{{ end }}
+{{- end }}
+{{ end -}}
+{{- end -}}

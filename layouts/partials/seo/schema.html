@@ -1,0 +1,77 @@
+{{- /* JSON-LD structured data for SEO / AEO. Toggle with params.seo.structuredData (default true). */ -}}
+{{- if .Site.Params.seo.structuredData | default true -}}
+{{- $author := .Params.author | default .Site.Author.name | default .Site.Params.meta.author -}}
+{{- $orgType := .Site.Params.seo.organizationType | default "Organization" -}}
+{{- $desc := .Description | default .Summary | default .Site.Params.description -}}
+
+{{- /* Resolve a featured image absolute URL, mirroring layouts/_default/featured.html */ -}}
+{{- $image := "" -}}
+{{- if .Params.featured -}}
+  {{- $image = (path.Join "img" (cond (eq .Params.featuredpath "date") (.Page.Date.Format "2006/01") (.Params.featuredpath)) .Params.featured) | absURL -}}
+{{- else if .Params.images -}}
+  {{- range first 1 .Params.images -}}{{- $image = .src | absURL -}}{{- end -}}
+{{- else if .Site.Params.images -}}
+  {{- range first 1 .Site.Params.images -}}{{- $image = . | absURL -}}{{- end -}}
+{{- end -}}
+
+{{- /* Publisher object reused by WebSite and BlogPosting */ -}}
+{{- $publisher := dict "@type" $orgType "name" .Site.Title "url" .Site.BaseURL -}}
+{{- with .Site.Params.seo.logo -}}
+  {{- $publisher = merge $publisher (dict "logo" (dict "@type" "ImageObject" "url" (. | absURL))) -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+  {{- $website := dict "@context" "https://schema.org" "@type" "WebSite" "url" .Site.BaseURL "name" .Site.Title -}}
+  {{- with .Site.Params.description -}}{{- $website = merge $website (dict "description" .) -}}{{- end -}}
+  {{- $website = merge $website (dict "inLanguage" .Site.Language.Lang) -}}
+  {{- with .Site.Params.seo.searchUrl -}}
+    {{- $website = merge $website (dict "potentialAction" (dict "@type" "SearchAction" "target" (dict "@type" "EntryPoint" "urlTemplate" .) "query-input" "required name=search_term_string")) -}}
+  {{- end -}}
+  <script type="application/ld+json">{{ $website | jsonify | safeJS }}</script>
+  {{- $org := merge (dict "@context" "https://schema.org") $publisher -}}
+  <script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- if and .IsPage (eq .Section "blog") -}}
+  {{- $post := dict
+    "@context" "https://schema.org"
+    "@type" "BlogPosting"
+    "headline" .Title
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "url" .Permalink
+    "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+    "author" (dict "@type" "Person" "name" $author)
+    "publisher" $publisher
+    "inLanguage" .Language.Lang
+  -}}
+  {{- with $desc -}}{{- $post = merge $post (dict "description" (. | plainify)) -}}{{- end -}}
+  {{- with $image -}}{{- $post = merge $post (dict "image" .) -}}{{- end -}}
+  {{- with .WordCount -}}{{- $post = merge $post (dict "wordCount" .) -}}{{- end -}}
+  {{- $keywords := union (.Params.tags | default slice) (.Params.categories | default slice) -}}
+  {{- with $keywords -}}{{- $post = merge $post (dict "keywords" .) -}}{{- end -}}
+  <script type="application/ld+json">{{ $post | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- if and .IsPage .Ancestors -}}
+  {{- $crumbs := slice -}}
+  {{- range .Ancestors.Reverse -}}{{- $crumbs = $crumbs | append . -}}{{- end -}}
+  {{- $crumbs = $crumbs | append . -}}
+  {{- $items := slice -}}
+  {{- range $i, $p := $crumbs -}}
+    {{- $items = $items | append (dict "@type" "ListItem" "position" (add $i 1) "name" $p.Title "item" $p.Permalink) -}}
+  {{- end -}}
+  {{- $breadcrumb := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items -}}
+  <script type="application/ld+json">{{ $breadcrumb | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- with .Params.faq -}}
+  {{- $questions := slice -}}
+  {{- range . -}}
+    {{- $questions = $questions | append (dict "@type" "Question" "name" .question "acceptedAnswer" (dict "@type" "Answer" "text" .answer)) -}}
+  {{- end -}}
+  {{- $faq := dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" $questions -}}
+  <script type="application/ld+json">{{ $faq | jsonify | safeJS }}</script>
+{{- end -}}
+
+{{- end -}}
