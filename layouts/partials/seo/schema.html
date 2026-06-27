@@ -2,14 +2,17 @@
 {{- if .Site.Params.seo.structuredData | default true -}}
 {{- $author := .Params.author | default .Site.Author.name | default .Site.Params.meta.author -}}
 {{- $orgType := .Site.Params.seo.organizationType | default "Organization" -}}
-{{- $desc := .Description | default .Summary | default .Site.Params.description -}}
+{{- $siteDesc := .Site.Params.description | default .Site.Params.meta.description -}}
+{{- $desc := .Description | default .Summary | default $siteDesc -}}
 
 {{- /* Resolve a featured image absolute URL, mirroring layouts/_default/featured.html */ -}}
 {{- $image := "" -}}
 {{- if .Params.featured -}}
   {{- $image = (path.Join "img" (cond (eq .Params.featuredpath "date") (.Page.Date.Format "2006/01") (.Params.featuredpath)) .Params.featured) | absURL -}}
 {{- else if .Params.images -}}
-  {{- range first 1 .Params.images -}}{{- $image = .src | absURL -}}{{- end -}}
+  {{- range first 1 .Params.images -}}
+    {{- if reflect.IsMap . -}}{{- $image = .src | absURL -}}{{- else -}}{{- $image = . | absURL -}}{{- end -}}
+  {{- end -}}
 {{- else if .Site.Params.images -}}
   {{- range first 1 .Site.Params.images -}}{{- $image = . | absURL -}}{{- end -}}
 {{- end -}}
@@ -22,7 +25,7 @@
 
 {{- if .IsHome -}}
   {{- $website := dict "@context" "https://schema.org" "@type" "WebSite" "url" .Site.BaseURL "name" .Site.Title -}}
-  {{- with .Site.Params.description -}}{{- $website = merge $website (dict "description" .) -}}{{- end -}}
+  {{- with $siteDesc -}}{{- $website = merge $website (dict "description" .) -}}{{- end -}}
   {{- $website = merge $website (dict "inLanguage" .Site.Language.Lang) -}}
   {{- with .Site.Params.seo.searchUrl -}}
     {{- $website = merge $website (dict "potentialAction" (dict "@type" "SearchAction" "target" (dict "@type" "EntryPoint" "urlTemplate" .) "query-input" "required name=search_term_string")) -}}

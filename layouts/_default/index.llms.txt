@@ -1,7 +1,7 @@
 {{- /* llms.txt index for LLM crawlers, per https://llmstxt.org. Toggle with params.seo.llmsTxt. */ -}}
 {{- if .Site.Params.seo.llmsTxt | default true -}}
 # {{ .Site.Title }}
-{{ with .Site.Params.description }}
+{{ with .Site.Params.description | default .Site.Params.meta.description }}
 > {{ . | plainify }}
 {{ end }}
 {{- range .Site.RegularPages.GroupBy "Section" }}
