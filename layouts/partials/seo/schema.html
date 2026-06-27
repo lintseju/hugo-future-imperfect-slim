@@ -35,7 +35,7 @@
   <script type="application/ld+json">{{ $org | jsonify | safeJS }}</script>
 {{- end -}}
 
-{{- if and .IsPage (eq .Section "blog") -}}
+{{- if and .IsPage (in site.Params.mainSections .Section) -}}
   {{- $post := dict
     "@context" "https://schema.org"
     "@type" "BlogPosting"
